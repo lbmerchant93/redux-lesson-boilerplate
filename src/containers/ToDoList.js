@@ -3,8 +3,7 @@ import Todo from '../components/ToDo';
 import { connect } from 'react-redux';
 import { showAll, showActive, showCompleted } from '../actions';
 
-const ToDoList = ({todos}) => {
-    console.log(todos)
+const ToDoList = ({ todos, showAll, showActive, showCompleted }) => {
 
     const displayTodos = todos.map(todo => {
         return (
