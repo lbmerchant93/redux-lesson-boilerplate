@@ -1,24 +1,51 @@
-export const todos = (state = [], action) => {
+const initialState = {
+    todos: [],
+    active: [], 
+    completed: [],
+    clicked: 'all'
+}
+
+export const todos = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_TODO': 
-            return [...state, { id: Date.now(), text: action.todo, completed: false }];
+            return {
+                ...state,
+                todos: [...state.todos, { id: Date.now(), text: action.todo, completed: false }]
+            };
         case 'TOGGLE_COMPLETED':
-            return state.map(todo => {
+            const updateToDos = state.todos.map(todo => {
                 if (todo.id === action.id) {
                     todo.completed = !todo.completed
                 } 
                 return todo
             })
+            return {
+                ...state,
+                todos: updateToDos
+            }
         case 'SHOW_ALL':
-            return state
+            return {
+                ...state,
+                clicked: 'all'
+            }
         case 'SHOW_ACTIVE':
-            return state.filter(todo => {
+            const activeToDos = state.todos.filter(todo => {
                 return !todo.completed
             })
+            return {
+                ...state,
+                active: activeToDos,
+                clicked: 'active'
+            }
         case 'SHOW_COMPLETED':
-            return state.filter(todo => {
+            const completedToDos = state.todos.filter(todo => {
                 return todo.completed
             })
+            return {
+                ...state,
+                completed: completedToDos,
+                clicked: 'completed'
+            }
         default: 
             return state;
     }
