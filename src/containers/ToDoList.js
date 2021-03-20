@@ -1,6 +1,7 @@
 import React from 'react';
 import Todo from '../components/ToDo';
 import { connect } from 'react-redux';
+import { showAll, showActive, showCompleted } from '../actions';
 
 const ToDoList = ({todos}) => {
     console.log(todos)
@@ -18,9 +19,9 @@ const ToDoList = ({todos}) => {
             <ul>
                 {displayTodos}
             </ul>
-            <button>All</button>
-            <button>Active</button>
-            <button>Completed</button>
+            <button onClick={() => showAll()}>All</button>
+            <button onClick={() => showActive()}>Active</button>
+            <button onClick={() => showCompleted()}>Completed</button>
         </section>
     )
 }
@@ -29,4 +30,10 @@ const mapStateToProps = state => ({
     todos: state.todos
 });
 
-export default connect(mapStateToProps)(ToDoList);
+const mapDispatchToProps = dispatch => ({
+    showAll: () => dispatch( showAll() ),
+    showActive: () => dispatch( showActive() ),
+    showCompleted: () => dispatch( showCompleted() )
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToDoList);
