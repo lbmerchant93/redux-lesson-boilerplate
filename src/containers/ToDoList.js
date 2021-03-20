@@ -14,9 +14,14 @@ const ToDoList = ({todos}) => {
         )
     })
     return (
-        <ul>
-            {displayTodos}
-        </ul>
+        <section>
+            <ul>
+                {displayTodos}
+            </ul>
+            <button>All</button>
+            <button>Active</button>
+            <button>Completed</button>
+        </section>
     )
 }
 
